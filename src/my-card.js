@@ -17,7 +17,7 @@ export class MyCard extends LitElement {
     this.title = "My card";
     this.image = "https://platform.polygon.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/22512212/shrek4_disneyscreencaps.com_675.jpg?quality=90&strip=all&crop=44.127604166667,30.392156862745,36.953125,57.96568627451";
     this.cardTitle = "Shrek";
-    this.cardDescription = "This is a picture of shrek. It is a wonderful picture. Don't go near his swamp.";
+    this.fancy = false;
   }
 
 
@@ -25,6 +25,10 @@ export class MyCard extends LitElement {
     return css`
       :host {
         display: inline-flex;
+      }
+      :host([fancy]) #card { 
+        background-color: green;
+        color: red;
       }
 
       #card {
@@ -41,6 +45,21 @@ export class MyCard extends LitElement {
         margin-top: 10px;
         margin-bottom: 12px;
       }
+      details summary {
+        text-align: left;
+        font-size: 20px;
+        padding: 8px 0;
+      }
+      details[open] summary {
+        font-weight: bold;
+      }
+      details div {
+      border: 2px solid black;
+      text-align: left;
+      padding: 8px;
+      height: 70px;
+      overflow: auto;
+      }
       img {
         border-radius: 16px;
         border: 2px solid yellow;
@@ -49,28 +68,54 @@ export class MyCard extends LitElement {
         max-width: 100%;
         height: auto;
       }
-      .cardDescriptionDesign {
-        font-size: 20px;
-        color: #FF5733;
+      button {
+        background-color: yellow;
+        font-weight: bold;
+        padding: 8px 16px;
+        border-radius: 16px;
+      }
+      button:hover {
+        color: red;
       }
    `;
   }
+
+ // put this anywhere on the MyCard class; just above render() is probably good
+openChanged(e) {
+  console.log(e);
+  if (e.target.getAttribute('open') !== null) {
+    this.fancy = true;
+  }
+  else {
+    this.fancy = false;
+  }
+}
 
   render() {
     return html`
     <div id="card">
       <h1 class="cardTitleDesign">${this.cardTitle}</h1>
       <img src="${this.image}" alt="${this.title}"/>
-      <p1 class="cardDescriptionDesign">${this.cardDescription}</p1>
+      <details ?open="${this.fancy}" @toggle="${this.openChanged}">
+        <summary>Description</summary>
+        <div>
+          <slot></slot>
+          <a href="https://hax.psu.edu/">
+            <button>Details</button>
+          </a>
+        </div>
+      </details>
     </div>`;
   }
 
+
+
   static get properties() {
     return {
+      fancy: { type: Boolean, reflect: true },
       title: { type: String },
       image: { type: String },
-      cardTitle: { type: String },
-      cardDescription: { type: String }
+      cardTitle: { type: String }
     };
   }
 }

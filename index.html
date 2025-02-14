@@ -26,6 +26,11 @@
       background-color: azure;
       padding: 50px;
     }
+    
+    my-card[fancy] {
+      background-color: purple;
+    }
+
   </style>
   <title>polaris-chip / my-card</title>
 </head>
@@ -41,15 +46,35 @@
   <a href="https://psu.edu/" target="_blank">PSU</a>
 
   <h1>my-card</h1>
-  <my-card></my-card>
-  <my-card title="Lol" cardTitle="Donkey" cardDescription="This is Donkey." image="https://modernfarmer.com/wp-content/uploads/2014/12/shrekfeature.jpg"></my-card>
-  <my-card title="Hello" cardTitle="Lol" cardDescription="Lol" image="https://www.cartoonbrew.com/wp-content/uploads/2024/07/shrek5-580x326.jpg"></my-card>
-  <my-card title="Wow" cardTitle="Wow" cardDescription="Amazing" image="https://i.pinimg.com/474x/4d/6c/f5/4d6cf548194403233b89925593b93439.jpg"></my-card>
-  <my-card title="GingerBread Man" cardTitle="GingerBread Man" cardDescription="This is the GingerBread Man." image="https://i.pinimg.com/736x/f1/43/0e/f1430e09daa4088c23aa87c3436ef60f.jpg"></my-card>
+  <button>Toggle</button>
+  <script>
+    const button = document.querySelector('button');
+    button.addEventListener('click', () => {
+      const card = document.querySelector('my-card');
+      card.fancy = !card.fancy;
+    });
+  </script>
+
+  <my-card>
+    <p1>This is a picture of shrek. It is a wonderful picture. Don't go near his swamp.</p1>
+  </my-card>
+  <my-card title="Lol" cardTitle="Donkey" image="https://modernfarmer.com/wp-content/uploads/2014/12/shrekfeature.jpg">
+    <p1>This is Donkey.</p1>
+  </my-card>
+  <my-card title="Hello" cardTitle="Lol" image="https://www.cartoonbrew.com/wp-content/uploads/2024/07/shrek5-580x326.jpg">
+    <p1>Lol</p1>
+  </my-card>
+  <my-card title="Wow" cardTitle="Wow" image="https://i.pinimg.com/474x/4d/6c/f5/4d6cf548194403233b89925593b93439.jpg">
+    <p1>Amazing</p1>
+  </my-card>
+  <my-card title="GingerBread Man" cardTitle="GingerBread Man" image="https://i.pinimg.com/736x/f1/43/0e/f1430e09daa4088c23aa87c3436ef60f.jpg">
+    <p1>This is the GingerBread Man.</p1>
+  </my-card>
 
   <!-- this is what is bringing in the definition for this tag -->
   <script type="module" src="./src/polaris-chip.js"></script>
   <script type="module" src="./src/my-card.js"></script>
+
 </body>
 
 </html>
